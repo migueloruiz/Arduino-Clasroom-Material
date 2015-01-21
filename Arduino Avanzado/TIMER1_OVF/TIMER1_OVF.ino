@@ -1,4 +1,4 @@
-
+ 
 /*********************************************************************************************************
 **********************************************************************************************************
 
@@ -19,7 +19,7 @@
 **********************************************************************************************************
 **********************************************************************************************************/
  
-int precarga = 34286;  //precarga para 2Hz
+int precarga = 49911;  //precarga para 2Hz
 //34286 =  (2^16) - 16MHz/256/2Hz
 
 /**********************************************************************************************************
@@ -35,6 +35,7 @@ int main(void) {
   noInterrupts();           // desabilita interrupciones
       TCCR1A = 0;               // configuracion basica
       TCCR1B = 0;               // configuracion basica
+      TCCR1C = 0;               // configuracion basica
       TCNT1 = precarga;            
 
       ////////////////////////////////////////
@@ -65,12 +66,12 @@ int main(void) {
  *  Nombre:      ISR(TIMER1_OVF_vect) 
  *  Retorna:     Nada
  *  Parametros:  Nada
- *  Descripcion: Se activa cada vez que se desvorda el timer 0
+ *  Descripcion: Se activa cada vez que se desvorda el timer 1
  **********************************************************************************************************/
 
 ISR(TIMER1_OVF_vect)        
 {
-	TCNT1 = precarga;   
-	PORTB = PINB ^(1 << PINB5);
+  TCNT1 = precarga;   
+  PORTB = PINB ^(1 << PINB5);
 }
 
